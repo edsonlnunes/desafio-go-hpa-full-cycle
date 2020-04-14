@@ -1,0 +1,11 @@
+version: "3"
+
+
+services: 
+  go-hpa:
+    image: golang:1.12
+    container_name: go-hpa
+    working_dir: /go/src/
+    volumes: 
+      - .:/go/src
+    tty: true
