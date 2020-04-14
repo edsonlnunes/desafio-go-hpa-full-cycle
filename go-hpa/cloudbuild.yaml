@@ -1,0 +1,20 @@
+steps:
+
+
+- id: "Rodando os testes"
+  name: 'gcr.io/cloud-builders/go'
+  args: ['test', './go-hpa']
+  env: ['GOPATH=.']
+
+- id: "Criando o container"
+  name: "gcr.io/cloud-builders/docker"
+  args:
+  - "build"
+  - "--build-arg"
+  - "version=1.0.0"
+  - "-t"
+  - "gcr.io/$PROJECT_ID/desafio-go-hpa:latest"
+  - "./go-hpa/."
+
+images:
+  - "gcr.io/$PROJECT_ID/desafio-go-hpa:latest"
