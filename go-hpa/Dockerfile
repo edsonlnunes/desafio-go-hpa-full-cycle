@@ -4,8 +4,8 @@ WORKDIR /go/src/
 
 COPY . .
 
-RUN GOOS=linux go build -o main -ldflags="-s -w"
-
+# RUN GOOS=linux go build -o main -ldflags="-s -w"
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 # CMD ["./main"]
 
 FROM scratch
