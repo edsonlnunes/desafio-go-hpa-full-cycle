@@ -4,6 +4,7 @@ package main
 import (
 	"math"
 	"fmt"
+	"net/http"
 )
 
 func makeCalc() float64{
@@ -18,8 +19,11 @@ func makeCalc() float64{
 }
 
 func main() {
-	result := makeCalc();
 
-	fmt.Printf("%f", result);
-	fmt.Printf("Code.Education Hocks");
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
+		result := makeCalc();
+		fmt.Fprintf(w, "Result: %f", result);
+	})
+
+	http.ListenAndServe(":8000", nil);
 }
